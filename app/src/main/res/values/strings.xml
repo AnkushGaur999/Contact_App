@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Room DB with MVVM</string>
+    <string name="contacts">Contacts</string>
+</resources>
