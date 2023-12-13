@@ -1,7 +1,9 @@
 package com.example.roomdbwithmvvm.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -30,7 +32,10 @@ class ContactActivity : AppCompatActivity() {
 
         binding.contactAdapter = adapter
         binding.contactViewModel = viewModel
+        binding.floatingActionButton.setOnClickListener{ addContact() }
 
+
+      //  addItemForFirstTime()
         setObserver()
 
     }
@@ -45,4 +50,7 @@ class ContactActivity : AppCompatActivity() {
         }
     }
 
+    private fun addContact(){
+        startActivity(Intent(this, AddContactActivity::class.java))
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.roomdbwithmvvm.viewmodels
 
+import android.view.View
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.roomdbwithmvvm.ContactApp
@@ -15,10 +17,16 @@ class ContactViewModel: ViewModel() {
 
     private val contactRepo: ContactRepo
 
+    val addButtonClick = MutableLiveData<Boolean>()
+
     init {
         val contactDatabase: ContactDatabase = ContactDatabase.getInstance(ContactApp.appContext)
         val contactDao: ContactDao = contactDatabase.contactDao()
         contactRepo = ContactRepo(contactDao)
+    }
+
+    fun addButton(){
+        addButtonClick.value = true
     }
 
     val allContacts: LiveData<List<Contact>> get() = contactRepo.getAllContacts
