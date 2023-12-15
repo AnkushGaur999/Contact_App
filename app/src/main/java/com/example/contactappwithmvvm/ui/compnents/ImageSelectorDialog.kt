@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.databinding.DataBindingUtil
 import com.example.contactappwithmvvm.R
+import com.example.contactappwithmvvm.databinding.ImagePickerBottomDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ImageSelectorDialog: BottomSheetDialogFragment() {
 
     private var onButtonClicked: OnButtonClicked? = null
+    private lateinit var binding:ImagePickerBottomDialogBinding
 
     companion object{
 
@@ -23,23 +25,20 @@ class ImageSelectorDialog: BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view:View = inflater.inflate(R.layout.image_picker_bottom_dialog, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.image_picker_bottom_dialog, null, false)
 
-        val galleryButton: Button = view.findViewById(R.id.galleryButton)
-        val cameraButton: Button = view.findViewById(R.id.cameraButton)
-
-        galleryButton.setOnClickListener {
+       binding.galleryButton.setOnClickListener {
             onButtonClicked?.onButtonClicked(GALLERY_SELECTED)
             dismiss()
         }
 
-        cameraButton.setOnClickListener {
+      binding.cameraButton.setOnClickListener {
             onButtonClicked?.onButtonClicked(CAMERA_SELECTED)
             dismiss()
         }
 
-        return view
+        return binding.root
     }
 
     fun setClickListener(lister: OnButtonClicked){
@@ -48,7 +47,6 @@ class ImageSelectorDialog: BottomSheetDialogFragment() {
 
 
     interface OnButtonClicked{
-
         fun onButtonClicked(item: Int)
 
     }
