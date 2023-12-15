@@ -1,8 +1,8 @@
-package com.example.roomdbwithmvvm.repositories
+package com.example.contactappwithmvvm.repositories
 
 import androidx.lifecycle.LiveData
-import com.example.roomdbwithmvvm.database.dao.ContactDao
-import com.example.roomdbwithmvvm.database.entities.Contact
+import com.example.contactappwithmvvm.database.dao.ContactDao
+import com.example.contactappwithmvvm.database.entities.Contact
 
 class ContactRepo (private val contactDao:ContactDao) {
 

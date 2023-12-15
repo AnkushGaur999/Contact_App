@@ -1,11 +1,11 @@
-package com.example.roomdbwithmvvm.adapters
+package com.example.contactappwithmvvm.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.roomdbwithmvvm.database.entities.Contact
-import com.example.roomdbwithmvvm.databinding.ContactItemBinding
+import com.example.contactappwithmvvm.database.entities.Contact
+import com.example.contactappwithmvvm.databinding.ContactItemBinding
 
 class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 

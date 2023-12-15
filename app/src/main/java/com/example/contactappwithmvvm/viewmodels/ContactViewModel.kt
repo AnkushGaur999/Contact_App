@@ -1,15 +1,14 @@
-package com.example.roomdbwithmvvm.viewmodels
+package com.example.contactappwithmvvm.viewmodels
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.roomdbwithmvvm.ContactApp
-import com.example.roomdbwithmvvm.database.dao.ContactDao
-import com.example.roomdbwithmvvm.database.entities.Contact
-import com.example.roomdbwithmvvm.database.local.ContactDatabase
-import com.example.roomdbwithmvvm.repositories.ContactRepo
+import com.example.contactappwithmvvm.ContactApp
+import com.example.contactappwithmvvm.database.dao.ContactDao
+import com.example.contactappwithmvvm.database.entities.Contact
+import com.example.contactappwithmvvm.database.local.ContactDatabase
+import com.example.contactappwithmvvm.repositories.ContactRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

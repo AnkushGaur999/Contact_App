@@ -1,10 +1,11 @@
-package com.example.roomdbwithmvvm.ui.activities
+package com.example.contactappwithmvvm.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import com.example.roomdbwithmvvm.R
-import com.example.roomdbwithmvvm.databinding.ActivityContactInfoBinding
+import com.example.contactappwithmvvm.R
+import com.example.contactappwithmvvm.databinding.ActivityContactInfoBinding
+
 
 class ContactInfoActivity : AppCompatActivity() {
 
@@ -14,8 +15,5 @@ class ContactInfoActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_contact_info)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
 
-    }
 }

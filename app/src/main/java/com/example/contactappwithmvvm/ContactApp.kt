@@ -1,4 +1,4 @@
-package com.example.roomdbwithmvvm
+package com.example.contactappwithmvvm
 
 import android.app.Application
 import android.content.Context

@@ -1,11 +1,15 @@
-package com.example.roomdbwithmvvm.database.entities
+package com.example.contactappwithmvvm.database.entities
 
+import android.graphics.Bitmap
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 
 @Entity(tableName = "contact_table")
+@Parcelize
 data class Contact(
 
     @PrimaryKey(autoGenerate = true)
@@ -14,9 +18,6 @@ data class Contact(
 
     @ColumnInfo(name = "first_name")
     val firstName: String,
-
-    @ColumnInfo(name = "middle_name")
-    val middleName: String,
 
     @ColumnInfo(name = "last_name")
     val lastName: String,
@@ -30,6 +31,8 @@ data class Contact(
     @ColumnInfo(name = "address")
     val address: String?,
 
+    @ColumnInfo(name = "user_image")
+    var image: Bitmap?= null
 
 
-)
+) : Parcelable

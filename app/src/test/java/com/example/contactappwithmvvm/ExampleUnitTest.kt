@@ -1,4 +1,4 @@
-package com.example.roomdbwithmvvm
+package com.example.contactappwithmvvm
 
 import org.junit.Test
 

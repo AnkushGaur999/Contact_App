@@ -1,4 +1,4 @@
-package com.example.roomdbwithmvvm.database.dao
+package com.example.contactappwithmvvm.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,7 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.roomdbwithmvvm.database.entities.Contact
+import com.example.contactappwithmvvm.database.entities.Contact
 
 
 @Dao

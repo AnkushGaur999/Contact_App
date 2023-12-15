@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Room DB with MVVM"
+rootProject.name = "Contact App"
 include(":app")
  

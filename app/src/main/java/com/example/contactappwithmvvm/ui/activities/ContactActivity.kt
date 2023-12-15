@@ -1,4 +1,4 @@
-package com.example.roomdbwithmvvm.ui.activities
+package com.example.contactappwithmvvm.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,13 +6,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.roomdbwithmvvm.R
-import com.example.roomdbwithmvvm.adapters.ContactAdapter
-import com.example.roomdbwithmvvm.database.entities.Contact
-import com.example.roomdbwithmvvm.databinding.ActivityContactBinding
-import com.example.roomdbwithmvvm.repositories.ContactRepo
-import com.example.roomdbwithmvvm.viewmodels.ContactViewModel
+import com.example.contactappwithmvvm.R
+import com.example.contactappwithmvvm.adapters.ContactAdapter
+import com.example.contactappwithmvvm.databinding.ActivityContactBinding
+import com.example.contactappwithmvvm.viewmodels.ContactViewModel
+
 
 class ContactActivity : AppCompatActivity() {
 
@@ -35,7 +33,6 @@ class ContactActivity : AppCompatActivity() {
         binding.floatingActionButton.setOnClickListener{ addContact() }
 
 
-      //  addItemForFirstTime()
         setObserver()
 
     }
@@ -46,6 +43,11 @@ class ContactActivity : AppCompatActivity() {
             list->
             if(list!=null && list.isNotEmpty()){
                 adapter.updateList(list)
+                binding.imageView2.visibility = View.GONE
+                binding.contactRV.visibility = View.VISIBLE
+            }else{
+                binding.contactRV.visibility = View.GONE
+                binding.imageView2.visibility = View.VISIBLE
             }
         }
     }

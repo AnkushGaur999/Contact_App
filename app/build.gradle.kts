@@ -2,14 +2,15 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
-    namespace = "com.example.roomdbwithmvvm"
+    namespace = "com.example.contactappwithmvvm"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.roomdbwithmvvm"
+        applicationId = "com.example.contactappwithmvvm"
         minSdk = 28
         targetSdk = 34
         versionCode = 1

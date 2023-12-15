@@ -7,11 +7,11 @@
 
         <variable
             name="contact"
-            type="com.example.roomdbwithmvvm.database.entities.Contact" />
+            type="com.example.contactappwithmvvm.database.entities.Contact" />
 
         <variable
             name="viewModel"
-            type="com.example.roomdbwithmvvm.viewmodels.ContactViewModel" />
+            type="com.example.contactappwithmvvm.viewmodels.ContactViewModel" />
 
     </data>
 
@@ -50,7 +50,7 @@
             app:srcCompat="@drawable/arrow_back_ios_24" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView"
+            android:id="@+id/userProfile"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="24dp"
@@ -62,7 +62,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView2"
+            android:id="@+id/uploadProfileBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/camera_24"
@@ -70,10 +70,10 @@
             app:civ_border_overlay="false"
             app:civ_border_width="1dp"
             app:civ_circle_background_color="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
+            app:layout_constraintBottom_toBottomOf="@+id/userProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/userProfile" />
 
         <EditText
             android:id="@+id/firstNameET"
@@ -91,25 +91,7 @@
             android:hint="@string/first_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
-
-            <EditText
-                android:id="@+id/middleNameET"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/edittext_bg"
-                android:drawableStart="@drawable/account_circle_24"
-                android:drawableEnd="@drawable/create_24"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:hint="@string/middle_name"
-                android:inputType="textCapWords"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/firstNameET" />
+            app:layout_constraintTop_toBottomOf="@+id/uploadProfileBtn" />
 
             <EditText
                 android:id="@+id/lastNameET"
@@ -127,7 +109,7 @@
                 android:inputType="textCapWords"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/middleNameET" />
+                app:layout_constraintTop_toBottomOf="@+id/firstNameET" />
 
             <EditText
                 android:id="@+id/mobileNoET"
