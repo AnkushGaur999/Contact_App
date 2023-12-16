@@ -8,11 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.contactappwithmvvm.R
 import com.example.contactappwithmvvm.adapters.ContactAdapter
+import com.example.contactappwithmvvm.database.entities.Contact
 import com.example.contactappwithmvvm.databinding.ActivityContactBinding
 import com.example.contactappwithmvvm.viewmodels.ContactViewModel
 
 
-class ContactActivity : AppCompatActivity() {
+class ContactActivity : AppCompatActivity(), ContactAdapter.OnContactClickListener {
 
     private lateinit var binding: ActivityContactBinding
 
@@ -27,11 +28,10 @@ class ContactActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_contact)
 
         viewModel = ViewModelProvider(this)[ContactViewModel::class.java]
-
+        adapter.setListener(this)
         binding.contactAdapter = adapter
         binding.contactViewModel = viewModel
         binding.floatingActionButton.setOnClickListener{ addContact() }
-
 
         setObserver()
 
@@ -54,5 +54,11 @@ class ContactActivity : AppCompatActivity() {
 
     private fun addContact(){
         startActivity(Intent(this, AddContactActivity::class.java))
+    }
+
+    override fun onContactClick(contact: Contact) {
+        val intent = Intent(this, ContactInfoActivity::class.java)
+        intent.putExtra("contactId", contact.id)
+        startActivity(intent)
     }
 }

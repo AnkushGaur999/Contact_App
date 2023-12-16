@@ -29,6 +29,6 @@ interface ContactDao {
     fun getAllContacts(): LiveData<List<Contact>>
 
     @Query("SELECT * FROM contact_table WHERE id LIKE:id")
-    suspend fun getContactById(id: Long): Contact
+    fun getContactById(id: Long): Contact
 
 }

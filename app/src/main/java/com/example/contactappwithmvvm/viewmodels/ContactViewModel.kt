@@ -10,9 +10,11 @@ import com.example.contactappwithmvvm.database.entities.Contact
 import com.example.contactappwithmvvm.database.local.ContactDatabase
 import com.example.contactappwithmvvm.repositories.ContactRepo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ContactViewModel: ViewModel() {
+class ContactViewModel : ViewModel() {
 
     private val contactRepo: ContactRepo
 
@@ -24,33 +26,43 @@ class ContactViewModel: ViewModel() {
         contactRepo = ContactRepo(contactDao)
     }
 
-    fun addButton(){
+    fun addButton() {
         addButtonClick.value = true
     }
 
     val allContacts: LiveData<List<Contact>> get() = contactRepo.getAllContacts
 
-    fun addContact(contact: Contact){
+    private val _userDetails = MutableLiveData<Contact>()
+    val userDetails:LiveData<Contact> get() = _userDetails
+
+    fun addContact(contact: Contact) {
 
         viewModelScope.launch(Dispatchers.IO) {
             contactRepo.addContact(contact)
         }
     }
 
-    fun updateContact(contact: Contact){
+    fun updateContact(contact: Contact) {
         viewModelScope.launch(Dispatchers.IO) {
             contactRepo.updateContact(contact)
         }
     }
 
-    fun deleteContact(contact: Contact){
+    fun getContact(id: Long) {
+      viewModelScope.launch(Dispatchers.IO) {
+          val result = contactRepo.getContact(id)
+          _userDetails.postValue(result)
+      }
+    }
+
+    fun deleteContact(contact: Contact) {
 
         viewModelScope.launch(Dispatchers.IO) {
             contactRepo.deleteContact(contact)
         }
     }
 
-    fun deleteAllContacts(){
+    fun deleteAllContacts() {
 
         viewModelScope.launch(Dispatchers.IO) {
             contactRepo.deleteAllContacts()

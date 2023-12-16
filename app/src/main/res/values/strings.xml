@@ -12,4 +12,6 @@
     <string name="add_contact">Add Contact</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
+    <string name="delete">Delete</string>
+    <string name="address">Address</string>
 </resources>
