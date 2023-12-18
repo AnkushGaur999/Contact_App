@@ -1,6 +1,7 @@
 package com.example.contactappwithmvvm.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.contactappwithmvvm.database.dao.ContactDao
 import com.example.contactappwithmvvm.database.entities.Contact
 
@@ -10,6 +11,10 @@ class ContactRepo (private val contactDao:ContactDao) {
 
     fun addContact(contact: Contact){
         contactDao.addContact(contact)
+    }
+
+    fun getContact(id: Long): Contact{
+        return contactDao.getContactById(id)
     }
 
     fun updateContact(contact: Contact){

@@ -1,39 +1,36 @@
 package com.example.contactappwithmvvm.ui.activities
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.contactappwithmvvm.R
 import com.example.contactappwithmvvm.database.entities.Contact
-import com.example.contactappwithmvvm.databinding.ActivityAddContactBinding
+import com.example.contactappwithmvvm.databinding.ActivityUpdateContactBinding
 import com.example.contactappwithmvvm.ui.compnents.ImageSelectorDialog
 import com.example.contactappwithmvvm.viewmodels.ContactViewModel
 import java.io.File
 
+class UpdateContactActivity : AppCompatActivity(), ImageSelectorDialog.OnButtonClicked {
 
-class AddContactActivity : AppCompatActivity(), ImageSelectorDialog.OnButtonClicked {
-
-    private lateinit var binding: ActivityAddContactBinding
-
-    private val TAG = "MainActivity"
+    private lateinit var binding: ActivityUpdateContactBinding
 
     private lateinit var viewModel: ContactViewModel
 
     private var imgBitmap: Bitmap? = null
     private var imageUri: Uri? = null
-
 
     /**
      * This variable is use to pick the image from gallery and set image into imageview.
@@ -95,31 +92,42 @@ class AddContactActivity : AppCompatActivity(), ImageSelectorDialog.OnButtonClic
                         ImageDecoder.createSource(contentResolver, imageUri!!)
                     ImageDecoder.decodeBitmap(source)
                 }
+            }
 
+            binding.uploadProfileBtn.setOnClickListener {
+                val imageBottomDialog = ImageSelectorDialog()
+                imageBottomDialog.setClickListener(this)
+                imageBottomDialog.show(supportFragmentManager, ImageSelectorDialog::class.java.name)
             }
 
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_contact)
-        viewModel = ViewModelProvider(this)[ContactViewModel::class.java]
-        binding.viewModel = viewModel
-        init()
-        setObserver()
-    }
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_update_contact)
 
-    /**
-     * This method initialize all the variable ion this activity.
-     */
-    private fun init() {
-        binding.imageView.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        viewModel = ViewModelProvider(this)[ContactViewModel::class.java]
+
+        viewModel.getContact(intent.getLongExtra("contactId", -1))
+
+        viewModel.userDetails.observe(this) { contact ->
+
+            contact?.let {
+                binding.contact = contact
+                imgBitmap = contact.image
+            }
+        }
 
         binding.uploadProfileBtn.setOnClickListener {
             val imageBottomDialog: ImageSelectorDialog = ImageSelectorDialog()
             imageBottomDialog.setClickListener(this)
             imageBottomDialog.show(supportFragmentManager, ImageSelectorDialog::class.java.name)
         }
+        binding.viewModel = viewModel
+
+        binding.navBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+
+        setObserver()
     }
 
     /**
@@ -127,10 +135,10 @@ class AddContactActivity : AppCompatActivity(), ImageSelectorDialog.OnButtonClic
      */
     private fun setObserver() {
 
-        viewModel.addButtonClick.observe(this) {
+        viewModel.updateButtonClick.observe(this) {
             if (validateData()) {
                 val contact = Contact(
-                    id = null,
+                    id = intent.getLongExtra("contactId", -1),
                     firstName = binding.firstNameET.text.toString().trim(),
                     lastName = binding.lastNameET.text.toString().trim(),
                     contactNumber = binding.mobileNoET.text.toString().trim(),
@@ -139,9 +147,20 @@ class AddContactActivity : AppCompatActivity(), ImageSelectorDialog.OnButtonClic
                     state = binding.stateET.text.toString(),
                     image = imgBitmap
                 )
-                addContact(contact)
+                updateContact(contact)
             }
         }
+    }
+
+    private fun updateContact(contact: Contact) {
+
+        viewModel.updateContact(contact)
+        Toast.makeText(this, "Contact Updated successfully", Toast.LENGTH_LONG).show()
+
+        val intent = Intent(this, ContactActivity::class.java)
+        intent.flags =
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     /**
@@ -164,7 +183,7 @@ class AddContactActivity : AppCompatActivity(), ImageSelectorDialog.OnButtonClic
                 return false
             }
 
-            binding.mobileNoET.text.isEmpty() || binding.mobileNoET.text.length < 10  -> {
+            binding.mobileNoET.text.isEmpty() || binding.mobileNoET.text.length < 10 -> {
                 showToast("Phone number is not valid")
                 binding.mobileNoET.requestFocus()
                 binding.mobileNoET.error = "Phone number is not valid"
@@ -216,16 +235,6 @@ class AddContactActivity : AppCompatActivity(), ImageSelectorDialog.OnButtonClic
      */
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-    }
-
-
-    /**
-     *  This method is used for add contact into local storage using contact view model class.
-     */
-    private fun addContact(contact: Contact) {
-        viewModel.addContact(contact)
-        Toast.makeText(this, "Contact Add successfully", Toast.LENGTH_LONG).show()
-        onBackPressedDispatcher.onBackPressed()
     }
 
     /**
@@ -307,8 +316,13 @@ class AddContactActivity : AppCompatActivity(), ImageSelectorDialog.OnButtonClic
      */
     override fun onButtonClicked(item: Int) {
         when (item) {
-            ImageSelectorDialog.CAMERA_SELECTED -> { checkCameraPermission() }
-            ImageSelectorDialog.GALLERY_SELECTED -> { checkGalleryPermissionAndOpenGallery() }
+            ImageSelectorDialog.CAMERA_SELECTED -> {
+                checkCameraPermission()
+            }
+
+            ImageSelectorDialog.GALLERY_SELECTED -> {
+                checkGalleryPermissionAndOpenGallery()
+            }
         }
     }
 

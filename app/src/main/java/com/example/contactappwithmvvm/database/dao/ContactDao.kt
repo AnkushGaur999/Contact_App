@@ -16,7 +16,7 @@ interface ContactDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addContact(contact: Contact)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateContact(contact: Contact)
 
     @Delete
@@ -29,6 +29,6 @@ interface ContactDao {
     fun getAllContacts(): LiveData<List<Contact>>
 
     @Query("SELECT * FROM contact_table WHERE id LIKE:id")
-    suspend fun getContactById(id: Long): Contact
+    fun getContactById(id: Long): Contact
 
 }

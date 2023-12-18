@@ -8,11 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.contactappwithmvvm.R
 import com.example.contactappwithmvvm.adapters.ContactAdapter
+import com.example.contactappwithmvvm.database.entities.Contact
 import com.example.contactappwithmvvm.databinding.ActivityContactBinding
 import com.example.contactappwithmvvm.viewmodels.ContactViewModel
 
 
-class ContactActivity : AppCompatActivity() {
+class ContactActivity : AppCompatActivity(), ContactAdapter.OnContactClickListener {
 
     private lateinit var binding: ActivityContactBinding
 
@@ -27,16 +28,20 @@ class ContactActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_contact)
 
         viewModel = ViewModelProvider(this)[ContactViewModel::class.java]
-
+        adapter.setListener(this)
         binding.contactAdapter = adapter
         binding.contactViewModel = viewModel
-        binding.floatingActionButton.setOnClickListener{ addContact() }
-
+        binding.floatingActionButton.setOnClickListener{ openAddContactActivity() }
 
         setObserver()
 
     }
 
+    /**
+     * Observer all the UI related data.
+     *  like: observer the list get from view model and set list into contact adapter.
+     *   if list is null of empty, then it will not contact available screen,
+     */
     private fun setObserver(){
 
         viewModel.allContacts.observe(this){
@@ -52,7 +57,19 @@ class ContactActivity : AppCompatActivity() {
         }
     }
 
-    private fun addContact(){
+    /**
+     *  This function is use for open add new contact screen.
+     */
+    private fun openAddContactActivity(){
         startActivity(Intent(this, AddContactActivity::class.java))
+    }
+
+    /**
+     *  This method handles the click on contact item and open contact info screen.
+     */
+    override fun onContactClick(contact: Contact) {
+        val intent = Intent(this, ContactInfoActivity::class.java)
+        intent.putExtra("contactId", contact.id)
+        startActivity(intent)
     }
 }

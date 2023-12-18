@@ -10,10 +10,14 @@ import com.example.contactappwithmvvm.databinding.ContactItemBinding
 class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     private val contactList = ArrayList<Contact>()
+    private var onContactClickListener: OnContactClickListener? = null
 
+    fun setListener(listener: OnContactClickListener) {
+        onContactClickListener = listener
+    }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(contactList: List<Contact>){
+    fun updateList(contactList: List<Contact>) {
         if (this.contactList.isNotEmpty()) this.contactList.clear()
         this.contactList.addAll(contactList)
         notifyDataSetChanged()
@@ -24,16 +28,32 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() 
         fun bind(contact: Contact) {
             binding.contact = contact
             binding.executePendingBindings()
+
+            binding.root.setOnClickListener {
+                onContactClickListener?.onContactClick(contact)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        return ContactViewHolder(ContactItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ContactViewHolder(
+            ContactItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int = contactList.size
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         holder.bind(contactList[position])
+    }
+
+
+    interface OnContactClickListener {
+
+        fun onContactClick(contact: Contact)
     }
 }
