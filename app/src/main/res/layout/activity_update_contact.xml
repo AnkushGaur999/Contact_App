@@ -15,86 +15,96 @@
 
     </data>
 
+ <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.UpdateContactActivity">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         android:fitsSystemWindows="true"
-        android:fillViewport="true">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.activities.AddContactActivity">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/create_new_contact"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/update_contact_details"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/arrow_back_ios_24"
-            app:tint="@color/black"
-            android:contentDescription="@string/todo" />
+            <ImageView
+                android:id="@+id/navBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/todo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/arrow_back_ios_24"
+                app:tint="@color/black" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userProfile"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="24dp"
-            android:src="@drawable/user_image"
-            app:civ_border_color="@color/black"
-            app:civ_border_width="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userProfile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="24dp"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp"
+                app:imageBitmap="@{contact.image}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/uploadProfileBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/camera_24"
-            app:civ_border_color="@color/black"
-            app:civ_border_overlay="false"
-            app:civ_border_width="1dp"
-            app:civ_circle_background_color="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/userProfile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userProfile" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/uploadProfileBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/camera_24"
+                app:civ_border_color="@color/black"
+                app:civ_border_overlay="false"
+                app:civ_border_width="1dp"
+                app:civ_circle_background_color="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/userProfile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userProfile" />
 
-        <EditText
-            android:id="@+id/firstNameET"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="32dp"
-            android:drawableStart="@drawable/account_circle_24"
-            android:drawableEnd="@drawable/create_24"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:background="@drawable/edittext_bg"
-            android:inputType="textCapWords"
-            android:hint="@string/first_name"
-            android:autofillHints="name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/uploadProfileBtn" />
+            <EditText
+                android:id="@+id/firstNameET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="32dp"
+                android:autofillHints="name"
+                android:background="@drawable/edittext_bg"
+                android:drawableStart="@drawable/account_circle_24"
+                android:drawableEnd="@drawable/create_24"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="@string/first_name"
+                android:inputType="textCapWords"
+                android:text="@{contact.firstName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uploadProfileBtn" />
 
             <EditText
                 android:id="@+id/lastNameET"
@@ -103,14 +113,15 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:autofillHints="name"
                 android:background="@drawable/edittext_bg"
                 android:drawableStart="@drawable/account_circle_24"
                 android:drawableEnd="@drawable/create_24"
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/last_name"
-                android:autofillHints="name"
                 android:inputType="textCapWords"
+                android:text="@{contact.lastName}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/firstNameET" />
@@ -122,6 +133,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:autofillHints="phone"
                 android:background="@drawable/edittext_bg"
                 android:drawableStart="@drawable/phone_24"
                 android:drawableEnd="@drawable/create_24"
@@ -129,8 +141,8 @@
                 android:ems="10"
                 android:hint="@string/mobile_no"
                 android:inputType="phone"
-                android:autofillHints="phone"
                 android:maxLength="10"
+                android:text="@{contact.contactNumber}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lastNameET" />
@@ -142,14 +154,15 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:autofillHints="emailAddress"
                 android:background="@drawable/edittext_bg"
                 android:drawableStart="@drawable/email_24"
                 android:drawableEnd="@drawable/create_24"
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/email"
-                android:autofillHints="emailAddress"
                 android:inputType="textEmailAddress"
+                android:text="@{contact.email}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mobileNoET" />
@@ -161,14 +174,15 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:autofillHints="postalAddress"
                 android:background="@drawable/edittext_bg"
                 android:drawableStart="@drawable/home_24"
                 android:drawableEnd="@drawable/create_24"
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/city"
-                android:autofillHints="postalAddress"
                 android:inputType="textCapWords"
+                android:text="@{contact.city}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
@@ -181,14 +195,15 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
+                android:autofillHints="postalAddress"
                 android:background="@drawable/edittext_bg"
                 android:drawableStart="@drawable/home_24"
                 android:drawableEnd="@drawable/create_24"
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/state"
-                android:autofillHints="postalAddress"
                 android:inputType="textCapWords"
+                android:text="@{contact.state}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cityET" />
@@ -201,9 +216,9 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/button_bg"
-                android:text="@string/add_contact"
+                android:onClick="@{()-> viewModel.updateButton()}"
+                android:text="@string/update"
                 android:textAllCaps="false"
-                android:onClick="@{()-> viewModel.addButton()}"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -214,4 +229,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

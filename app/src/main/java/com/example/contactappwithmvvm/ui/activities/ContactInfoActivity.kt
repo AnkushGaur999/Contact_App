@@ -1,17 +1,15 @@
 package com.example.contactappwithmvvm.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
+
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import com.example.contactappwithmvvm.R
 import com.example.contactappwithmvvm.database.entities.Contact
 import com.example.contactappwithmvvm.databinding.ActivityContactInfoBinding
 import com.example.contactappwithmvvm.viewmodels.ContactViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class ContactInfoActivity : AppCompatActivity() {
@@ -48,6 +46,12 @@ class ContactInfoActivity : AppCompatActivity() {
 
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.editButton.setOnClickListener {
+            val intent = Intent(this, UpdateContactActivity::class.java)
+            intent.putExtra("contactId", contact?.id)
+            startActivity(Intent(intent))
         }
     }
 

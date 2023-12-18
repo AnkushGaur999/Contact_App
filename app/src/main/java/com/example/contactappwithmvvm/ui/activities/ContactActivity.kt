@@ -31,12 +31,17 @@ class ContactActivity : AppCompatActivity(), ContactAdapter.OnContactClickListen
         adapter.setListener(this)
         binding.contactAdapter = adapter
         binding.contactViewModel = viewModel
-        binding.floatingActionButton.setOnClickListener{ addContact() }
+        binding.floatingActionButton.setOnClickListener{ openAddContactActivity() }
 
         setObserver()
 
     }
 
+    /**
+     * Observer all the UI related data.
+     *  like: observer the list get from view model and set list into contact adapter.
+     *   if list is null of empty, then it will not contact available screen,
+     */
     private fun setObserver(){
 
         viewModel.allContacts.observe(this){
@@ -52,10 +57,16 @@ class ContactActivity : AppCompatActivity(), ContactAdapter.OnContactClickListen
         }
     }
 
-    private fun addContact(){
+    /**
+     *  This function is use for open add new contact screen.
+     */
+    private fun openAddContactActivity(){
         startActivity(Intent(this, AddContactActivity::class.java))
     }
 
+    /**
+     *  This method handles the click on contact item and open contact info screen.
+     */
     override fun onContactClick(contact: Contact) {
         val intent = Intent(this, ContactInfoActivity::class.java)
         intent.putExtra("contactId", contact.id)

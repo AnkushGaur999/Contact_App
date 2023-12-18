@@ -14,4 +14,8 @@
     <string name="camera">Camera</string>
     <string name="delete">Delete</string>
     <string name="address">Address</string>
+    <string name="todo">TODO</string>
+    <string name="edit">Edit</string>
+    <string name="update">Update</string>
+    <string name="update_contact_details">Update Contact Details</string>
 </resources>

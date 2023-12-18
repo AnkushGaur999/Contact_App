@@ -19,6 +19,7 @@ class ContactViewModel : ViewModel() {
     private val contactRepo: ContactRepo
 
     val addButtonClick = MutableLiveData<Boolean>()
+    val updateButtonClick = MutableLiveData<Boolean>()
 
     init {
         val contactDatabase: ContactDatabase = ContactDatabase.getInstance(ContactApp.appContext)
@@ -30,10 +31,14 @@ class ContactViewModel : ViewModel() {
         addButtonClick.value = true
     }
 
+    fun updateButton() {
+        updateButtonClick.value = true
+    }
+
     val allContacts: LiveData<List<Contact>> get() = contactRepo.getAllContacts
 
     private val _userDetails = MutableLiveData<Contact>()
-    val userDetails:LiveData<Contact> get() = _userDetails
+    val userDetails: LiveData<Contact> get() = _userDetails
 
     fun addContact(contact: Contact) {
 
@@ -49,10 +54,10 @@ class ContactViewModel : ViewModel() {
     }
 
     fun getContact(id: Long) {
-      viewModelScope.launch(Dispatchers.IO) {
-          val result = contactRepo.getContact(id)
-          _userDetails.postValue(result)
-      }
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = contactRepo.getContact(id)
+            _userDetails.postValue(result)
+        }
     }
 
     fun deleteContact(contact: Contact) {

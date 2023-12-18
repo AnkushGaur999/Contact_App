@@ -28,8 +28,11 @@ data class Contact(
     @ColumnInfo(name = "email")
     val email:String,
 
-    @ColumnInfo(name = "address")
-    val address: String?,
+    @ColumnInfo(name = "city")
+    val city: String,
+
+    @ColumnInfo(name = "state")
+    val state: String,
 
     @ColumnInfo(name = "user_image")
     var image: Bitmap?= null
